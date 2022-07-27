@@ -1,0 +1,10 @@
+.gameBoard {
+    width: 75vmin;
+    height: 75vmin;
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.boardSquare {
+    border: solid 0.2vmin black;
+}
