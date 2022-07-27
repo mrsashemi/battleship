@@ -41,12 +41,14 @@ function selectDimensions(dimension) {
     sizeButtons.style.display = "none"
     initialBoard.style.gridTemplateRows = `repeat(${dimension}, 1fr)`;
     initialBoard.style.gridTemplateColumns = `repeat(${dimension}, 1fr)`
+    setPieces(player1, 0);
 };
 
 //Once initialized, have the player and AI set their pieces on the board
-function setPieces(playerPicker) {
-    let boardSquare = document.querySelectorAll("boardSquare");
+function setPieces(playerPicker, n) {
+    let boardSquare = document.querySelectorAll(".boardSquare");
 
+    //Order in which the pieces will be places as denoted by n
     let shipsArray = [
         playerPicker.playerBoard.carrier, 
         playerPicker.playerBoard.battleship, 
@@ -55,7 +57,19 @@ function setPieces(playerPicker) {
         playerPicker.playerBoard.destroyer
     ]
 
-    
+    boardSquare.forEach(e => {
+        e.addEventListener("click", () => {
+            e.style.background = "aqua";
+            playerPicker.playerBoard.populateBoard(e.textContent, shipsArray[n]);
+            nextPiece(playerPicker, e.textContent, shipsArray[n].size);
+        })
+    })
 
 }
 
+//Based on the first space selected, give options as to what is available next
+function nextPiece(playerPicker, coordinates, size) {
+    let filteredBoard = playerPicker.playerBoard.board.filter(c => 
+        (c[0] == coordinates[0] && Math.abs(c[1] - coordinates[1]) < size) || 
+        (c[1] == coordinates[1] && Math.abs(c.charCodeAt(0) - coordinates.charCodeAt(0)) < size));
+}
