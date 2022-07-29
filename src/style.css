@@ -1,10 +1,28 @@
-.gameBoard {
+.gameBoard,
+.aiBoard {
     width: 75vmin;
     height: 75vmin;
     display: grid;
     grid-auto-flow: column;
 }
 
-.boardSquare {
+.boardSquare,
+.aiSquare {
     border: solid 0.2vmin black;
+}
+
+.hoverSquare {
+    background: gray;
+    border: solid 0.2vmin black;
+}
+
+.aiSquare {
+    color: white;
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none; 
+}
+
+#axis {
+    display: none;
 }

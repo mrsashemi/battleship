@@ -39,3 +39,5 @@ function randomCoordinates(board) {
     let filteredBoard = board.filter(c => c != "missed"); 
     return filteredBoard[_.random(filteredBoard.length - 1)];
 }
+
+
