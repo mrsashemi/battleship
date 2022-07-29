@@ -40,7 +40,7 @@ describe('player and computer objects and their properties ', () => {
         expect(testAi.playerBoard.board[1]).toStrictEqual("Blast");
 
         //Now test the computers attack to see if it lands. Since the coordinates are random, simulate Logical OR in jest with jest-matcher-one-of by d4nyll on github.
-        expect(testAi.attackEnemy(testPlayer)).toBeOneOf(["Likely Miss", "Likely Hit"]);
+        expect(typeof testAi.attackEnemy(testPlayer)).toBe("number");
 
         //Check once more to see if the player can move now to ensure turn swaps properly, it also sends a missed attack this time.
         expect(testAi.isTurn).toBeFalsy();

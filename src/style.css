@@ -1,28 +1,59 @@
+body,
+html {
+    padding: 0;
+    margin: 1vmin;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#boards {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    justify-content: space-around;
+}
+
+
 .gameBoard,
 .aiBoard {
-    width: 75vmin;
-    height: 75vmin;
+    width: fit-content;
+    height: fit-content;
     display: grid;
     grid-auto-flow: column;
 }
 
 .boardSquare,
 .aiSquare {
+    font-size: 1vmin;
+    height: 5vmin;
+    width: 5vmin;
     border: solid 0.2vmin black;
 }
 
 .hoverSquare {
+    font-size: 1vmin;
     background: gray;
     border: solid 0.2vmin black;
 }
 
 .aiSquare {
-    color: white;
+    color: black;
     -webkit-user-select: none; 
     -ms-user-select: none; 
     user-select: none; 
 }
 
-#axis {
+.aiSquare:hover {
+    background-color: rgba(0, 255, 255, 0.242);
+}
+
+#axis,
+#startGame {
+    width: 10vmin;
     display: none;
 }

@@ -5,26 +5,31 @@ function gameboard(dimension) {
         board: createBoardArray(dimension * dimension),
         dimensions: dimension,
         size: dimension * dimension,
-        carrier: shipFactory("carrier", [], 5, false),
-        battleship: shipFactory("battleship", [], 4, false),
-        cruiser: shipFactory("cruiser", [], 3, false),
-        submarine: shipFactory("submarine", [], 3, false),
-        destroyer: shipFactory("destroyer", [], 2, false),
+        "carrier": shipFactory("carrier", [], 5, false),
+        "battleship": shipFactory("battleship", [], 4, false),
+        "cruiser": shipFactory("cruiser", [], 3, false),
+        "submarine": shipFactory("submarine", [], 3, false),
+        "destroyer": shipFactory("destroyer", [], 2, false),
         populateBoard(coordinates, ship) {
             let index = this.board.indexOf(coordinates);
             this.board[index] = `${coordinates} ${ship.title}`;
             ship.hitLocation.push(coordinates);
         },
         receiveAttack(coordinates, ship) {
-            let index = this.board.indexOf(`${coordinates} ${ship.title}`);
-            return (index != -1) ? this.hit(coordinates, ship) : this.missed(coordinates);
+            let index;
+            if (ship == "empty") {
+                index = this.board.indexOf(coordinates + ' ' + "empty");
+            } else {
+                index = this.board.indexOf(coordinates + ' ' + ship.title);
+            }
+            return (index !== -1) ? this.hit(coordinates, ship) : this.missed(coordinates);
         },
         hit(coordinates, ship) {
             let index = ship.hitLocation.indexOf(coordinates);
              if (index != -1) {
-                let i = this.board.indexOf(`${coordinates} ${ship.title}`);
-                this.board[i] = "Blast"
-                ship.hitLocation[index] = "Blast"
+                let i = this.board.indexOf(coordinates + ' ' + ship.title);
+                this.board[i] = "Blast";
+                ship.hitLocation[index] = "Blast";
              } else {
                 this.missed(coordinates);
              }

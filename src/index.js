@@ -1,10 +1,12 @@
 import './style.css';
 import player from './players'
-import { random } from 'lodash';
+import _ from 'lodash';
+import computer from './computer';
+import { fightWar } from './war';
 
 //declare objects
-const player1 = {};
-const playerAi = {};
+export const player1 = {};
+export const playerAi = {};
 
 //cacheDom
 const initialBoard = document.querySelector(".gameBoard");
@@ -14,6 +16,7 @@ const sixBySix = document.getElementById("six");
 const eightByEight = document.getElementById("eight");
 const tenByTen = document.getElementById("ten");
 const axis = document.getElementById("axis")
+const beginGame = document.getElementById("startGame");
 
 
 //initialize the DOM with the gameboard
@@ -29,11 +32,16 @@ initializeDimensions();
  //Initialize the players depending on the selected dimensions//
 ///////////////////////////////////////////////////////////////
 function selectDimensions(dimension) {
+
     const playerSet = player(dimension);
+    const aiSet = computer(dimension)
 
     for (let p in playerSet) {
         player1[p] = playerSet[p];
-        playerAi[p] = playerSet[p];
+    }
+
+    for (let p in aiSet) {
+        playerAi[p] = aiSet[p];
     }
 
     playerSet.playerBoard.board.forEach(element => {
@@ -80,17 +88,15 @@ function setPieces(playerPicker, n, dimension) {
         if (skipper == 1 & pos == 0) {
             skipper = dimension;
             pos = 1;
-            axis.textContent = "Set Vertically"
         } else {
             skipper = 1;
             pos = 0;
-            axis.textContent = "Set Horizontally"
         }
     })
 
     boardSquare.forEach(e => {
         ['click', 'mouseenter', 'mouseleave'].forEach(evt => {
-            e.addEventListener(evt, () => {
+            e.addEventListener(evt, function boardEvents() {
                 //If the pieces are adjacent, allow them to be placed
                 let elementSiblingArray = [];
     
@@ -122,6 +128,18 @@ function setPieces(playerPicker, n, dimension) {
     
                     //advance to the next piece to be placed
                     n++;
+
+                    if (n > 4) {
+                        //remove event listeners by cloning the baord
+                        let oldBoard = initialBoard;
+                        let newBoard = oldBoard.cloneNode(true);
+                        oldBoard.parentNode.removeChild(oldBoard);
+                        document.getElementById("boards").prepend(newBoard);
+
+                        //display start game button
+                        beginGame.style.display = 'block';
+                        axis.style.display = 'none';
+                    }
                 }
             })
         })
@@ -153,11 +171,11 @@ function setAiPieces(playerPicker, n, dimension) {
     ]
 
     //Randomly select an index to place ships
-    let index = Math.floor(Math.random() * (filteredAiArr.length - shipsArray[n].size));
+    let index = _.random(filteredAiArr.length - shipsArray[n].size);
     let randomIndex = aiSquares.indexOf(filteredAiArr[index]);
 
     //Allow the ai to randomly switch between setting vertically or horizontally
-    let randomVal = Math.floor(Math.random()*100);
+    let randomVal = _.random(100);
     let skipper;
     let pos;
 
@@ -216,4 +234,3 @@ function setAiPieces(playerPicker, n, dimension) {
         return setAiPieces(playerPicker, n+1, dimension);
     }
 }
-export default setAiPieces;

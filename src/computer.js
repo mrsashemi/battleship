@@ -10,17 +10,19 @@ function computer(dimension) {
             if (this.isTurn) {
                 //For now, randomize the coordinates
                 let coordinates = randomCoordinates(enemy.playerBoard.board);
-
+                let index = enemy.playerBoard.board.indexOf(coordinates);
+                
                 //Split the received coordinates into array, if length 2, then its a hit
                 let splitIndex = coordinates.split(' ');
                 this.isTurn = false;
                 enemy.isTurn = true;
+
                 if (splitIndex.length == 2) {
-                    enemy.playerBoard.receiveAttack(splitIndex[0], splitIndex[1]);
-                    return "Likely Hit"
+                    enemy.playerBoard.receiveAttack(splitIndex[0], enemy.playerBoard[splitIndex[1]]);
+                    return index;
                 } else {
                     enemy.playerBoard.receiveAttack(coordinates, "empty");
-                    return "Likely Miss"
+                    return index;
                 }
             }
         },
@@ -36,7 +38,7 @@ export default computer
 
 
 function randomCoordinates(board) {
-    let filteredBoard = board.filter(c => c != "missed"); 
+    let filteredBoard = board.filter(c => c != "missed" && c != "Blast"); 
     return filteredBoard[_.random(filteredBoard.length - 1)];
 }
 
