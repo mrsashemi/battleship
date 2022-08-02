@@ -65,9 +65,9 @@ function selectDimensions(dimension) {
     setAiPieces(playerAi, 0, dimension);
 };
 
-  //////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
  //Once initialized, have the player set their pieces on the board//
-//////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 function setPieces(playerPicker, n, dimension) {
     let boardSquare = [...document.querySelectorAll(".boardSquare")];
 
@@ -120,7 +120,7 @@ function setPieces(playerPicker, n, dimension) {
                     })
                 } else if (areAdjacent && evt == 'click') {
                     elementSiblingArray.forEach(square => {
-                        square.style.background = "rgb(210, 215, 211)";
+                        square.style.background = "rgb(210, 215, 211, 0.4)";
                         playerPicker.playerBoard.populateBoard(square.textContent, shipsArray[n]);
                         square.textContent = shipsArray[n].title;
                         square.style.pointerEvents = "none";

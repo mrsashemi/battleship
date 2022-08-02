@@ -1,5 +1,94 @@
+@font-face {
+    font-family: '8bit';
+    src: url('fonts/VT323-Regular.ttf');
+}
+
+
 body,
 html {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.background1 {
+    position: absolute;
+    background-image: url('images/sunsetmaui.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    right: 1.5vmin;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+}
+
+.background2 {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    /* From https://css.glass */
+    background: linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.2) 0%,
+        rgba(255, 154, 0, 0.2) 10%,
+        rgba(208, 222, 33, 0.2) 20%,
+        rgba(79, 220, 74, 0.2) 30%,
+        rgba(63, 218, 216, 0.2) 40%,
+        rgba(47, 201, 226, 0.2) 50%,
+        rgba(28, 127, 238, 0.2) 60%,
+        rgba(95, 21, 242, 0.2) 70%,
+        rgba(186, 12, 248, 0.2) 80%,
+        rgba(251, 7, 217, 0.2) 90%,
+        rgba(255, 0, 0, 0.2) 100%
+    );
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(6.5px);
+    z-index: 2;
+}
+
+.background3 {
+    position: absolute;
+    background-image: url('images/sunsetmaui.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    right: -1.5vmin;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 3;
+    opacity: 0.25;
+}
+
+.borderBackground {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 4;
+    border: 2.5vmin black solid;
+    box-sizing: border-box;
+}
+
+
+
+#container {
+    position: relative;
     width: 100vw;
     height: 100vh;
     padding: 0;
@@ -10,6 +99,7 @@ html {
     justify-content: center;
     align-items: center;
     gap: 5vmin;
+    z-index: 10;
 }
 
 #boards {
@@ -19,6 +109,8 @@ html {
     height: fit-content;
     display: flex;
     justify-content: space-around;
+    font-family: '8bit', 'Courier New', Courier, monospace;
+    color: white;
 }
 
 
@@ -28,6 +120,8 @@ html {
     height: fit-content;
     display: grid;
     grid-auto-flow: column;
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px);
 }
 
 .boardSquare,
@@ -35,38 +129,83 @@ html {
     font-size: 1vmin;
     height: 5vmin;
     width: 5vmin;
-    border: solid 0.2vmin black;
+    background: rgba(58, 58, 58, 0.4);
 }
 
 .hoverSquare {
     font-size: 1vmin;
-    background: gray;
-    border: solid 0.2vmin black;
+    background: rgba(48, 22, 238, 0.4);
 }
 
 .aiSquare {
-    color: black;
+    color: transparent;
     -webkit-user-select: none; 
     -ms-user-select: none; 
     user-select: none; 
 }
 
 .aiSquare:hover {
-    background-color: rgba(0, 255, 255, 0.242);
+    background-color: rgba(0, 255, 255, 0.25);
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px);
 }
 
 #axis,
 #startGame,
 #resetGame {
-    width: 10vmin;
     display: none;
 }
 
 .sizeButtons {
+    font-family: '8bit', 'Courier New', Courier, monospace;
     display: flex;
     flex-direction: column;
     gap: 0.5vmin;
     justify-content: center;
     align-items: center;
+}
+
+.sizeButtons > h1,
+.sizeButtons > h2 {
+    font-family: '8bit', 'Courier New', Courier, monospace;
+    color: white;
+    text-shadow:
+    -1px -1px 0 black,  
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
+}
+
+button {
+    position: relative;
+    font-family: '8bit', 'Courier New', Courier, monospace;
+    font-size: 3vmin;
+    font-weight: bold;
+    width: 30vmin;
+    height: 5vmin;
+    text-align: center;
+    display: inline-block;
+    margin: 2vmin;
+    padding: 1vmin 0 1vmin 1vmin;
+    background-color: lightgray;
+    text-shadow: -0.15vmin -0.15vmin black, 0.15vmin 0.15vmin white;
+    color: gray;
+    -webkit-border-radius: 1vmin;
+	-moz-border-radius: 1vmin;
+	-o-border-radius: 1vmin;
+	border-radius: 1vmin;
+    box-shadow: 0 .7vmin gray; 
+    cursor: pointer;
+}
+
+.results {
+    font-size: 3vmin;
+    font-family: '8bit', 'Courier New', Courier, monospace;
+    color: white;
+    text-shadow:
+    -1px -1px 0 black,  
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
 }
 

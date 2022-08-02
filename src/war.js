@@ -32,8 +32,14 @@ function playerStrike() {
                 player1.attackEnemy(playerAi, coordinates[0], playerAi.playerBoard[coordinates[1]]);
                 
                 //Record results
-                e.style.background = "pink";
+                e.style.color = "white";
                 e.textContent = playerAi.playerBoard.board[index];
+
+                if (e.textContent === "missed") {
+                    e.style.background = "rgba(0, 0, 255, 0.25)";
+                } else {
+                    e.style.background = "rgba(255, 0, 0, 0.25)";
+                }
 
                 player1.checkWin(playerAi);
 
@@ -65,7 +71,12 @@ function computerStrike() {
         console.log(index);
         console.log(playerSquares[index]);
         playerSquares[index].textContent = player1.playerBoard.board[index];
-        playerSquares[index].style.background = "aqua";
+        
+        if (playerSquares[index].textContent === "missed") {
+            playerSquares[index].style.background = "rgba(0, 0, 255, 0.25)";
+        } else {
+            playerSquares[index].style.background = "rgba(255, 0, 0, 0.25)";
+        }
 
         playerAi.checkWin(player1);
 
@@ -105,7 +116,7 @@ function resetGame() {
 
         result.textContent = '';
         reset.style.display = 'none';
-        sizeButtons.style.display = 'block';
+        sizeButtons.style.display = 'flex';
     })
 }
 
