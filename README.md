@@ -47,6 +47,15 @@ Building the DOM:
 2) War.js
     a) Create event listeners to advance the game, and two functions for the player or computer to attack.
     b) The attack functions make use of the player/computer object function properties, and are mostly used to style the board
-    c) Finally, a function to reset the game
+    c) Finally, a function to reset the game once a winner is declared
+
+3) Style the app
+
+That's pretty much the process! I think the most challenging aspect was honestly getting the AI to randomly place the board pieces. Not only did it need to randomly place for each ship, but also randomly select the orientation, make sure its not placing over another ship, and also making sure each ship actually gets placed. The goal of the project was to avoid using too many console.log messages and try to test as much as possible. In this situation, I found the function to be too difficult to mock and easier to smooth out in the console. It still took sometime to test every return value, and a lot of trial and error, but I managed to make it work! 
+
+I didn't run into too much trouble otherwise, there was an issue where the computer was firing too many attacks following a player attack, but that was fixed with a simple set timeout function to delay the attack.
+
+**Conclusion**
+This one was hard! But I really enjoyed it and it was actually much easier to make functional than the tic-tac-toe project (no minimax or smart AI necessary for this project). 
 
 
