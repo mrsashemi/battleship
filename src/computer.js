@@ -27,7 +27,7 @@ function computer(dimension) {
             }
         },
         checkWin(enemy) {
-            if (enemy.playerBoard.checkLoss() == "All ships destroyed. Game Over, you lost.") {
+            if (enemy.playerBoard.checkLoss()) {
                 this.isWinner = true;
                 return "Congrats! You won the battle!"
             }

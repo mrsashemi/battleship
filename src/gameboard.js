@@ -43,10 +43,10 @@ function gameboard(dimension) {
             let counter = 0;
 
             for (let i = 0; i < shipArr.length; i++) {
-                (shipArr[i].isSunk() == true) ? counter++ : counter--;
+                (shipArr[i].isSunk() === true) ? counter++ : counter--;
             }
 
-            return (counter == 5) ? "All ships destroyed. Game Over, you lost." : counter;
+            return (counter === 5) ? true : false;
         }
     }
 }

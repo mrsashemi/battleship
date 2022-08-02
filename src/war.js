@@ -1,8 +1,10 @@
-import { player1, playerAi } from ".";
-import _ from 'lodash';
+import { player1, playerAi, initialBoard, aiBoard } from ".";
 
 //cache dom
 const beginGame = document.getElementById("startGame");
+const reset = document.getElementById("resetGame");
+const result = document.querySelector(".results");
+const sizeButtons = document.querySelector(".sizeButtons");
 
 export function fightWar() {
     beginGame.addEventListener('click', () => {
@@ -15,17 +17,17 @@ export function fightWar() {
 fightWar();
 
 function playerStrike() {
-    document.querySelector(".aiBoard").style.pointerEvents = 'auto';
-    let aiSquares = [...document.querySelector(".aiBoard").children];
+    aiBoard.style.pointerEvents = 'auto';
+    let aiSquares = [...aiBoard.children];
     aiSquares.forEach(e => {
         if (player1.isTurn) {
             e.addEventListener('click', () => {
-                console.log(playerAi.isTurn);
                 //Find the index and plug it into the computers gameBoard receiveAttack function
                 let index = aiSquares.indexOf(e);
                 let c = playerAi.playerBoard.board[index];
                 let coordinates = c.split(' ');
-
+                
+                //Check if coordinates include a ship name
                 (coordinates.length < 2) ? player1.attackEnemy(playerAi, coordinates[0], "empty") : 
                 player1.attackEnemy(playerAi, coordinates[0], playerAi.playerBoard[coordinates[1]]);
                 
@@ -33,26 +35,78 @@ function playerStrike() {
                 e.style.background = "pink";
                 e.textContent = playerAi.playerBoard.board[index];
 
-                //Delay enemy strike
-                setTimeout(() => {
-                    computerStrike();
-                }, 500)
+                player1.checkWin(playerAi);
+
+                if (player1.isWinner) {
+                    reset.style.display = 'block';
+                    result.textContent = `Player 1, ${player1.checkWin(playerAi)}`;
+                    resetGame();
+                } else {
+                    aiBoard.style.pointerEvents = 'none';
+
+                    //Delay enemy strike
+                    setTimeout(() => {
+                        computerStrike();
+                    }, 500)
+                }
             })
         }
     })
 }
 
 
-
+//the AI Object already has the function built out to pick and submit a random index
 function computerStrike() {
     if (playerAi.isTurn == true) {
-        document.querySelector(".aiBoard").style.pointerEvents = 'none';
-        let playerSquares = [...document.querySelector(".gameBoard").children];
+        aiBoard.style.pointerEvents = 'none';
+        let playerSquares = [...initialBoard.children];
         let index = playerAi.attackEnemy(player1);
+
+        console.log(index);
+        console.log(playerSquares[index]);
         playerSquares[index].textContent = player1.playerBoard.board[index];
         playerSquares[index].style.background = "aqua";
-        playerStrike();
+
+        playerAi.checkWin(player1);
+
+        if(playerAi.isWinner) {
+            reset.style.display = 'block';
+            result.textContent = `Computer, ${playerAi.checkWin(player1)}`;
+            resetGame();
+        } else {
+            aiBoard.style.pointerEvents = 'auto';
+            playerStrike();
+        }
     }
+}
+
+
+//Function to reset the game
+
+function resetGame() {
+    reset.addEventListener('click', () => {
+        while(initialBoard.firstChild) {
+            initialBoard.removeChild(initialBoard.firstChild);
+            aiBoard.removeChild(aiBoard.firstChild);
+        }
+
+        for (let prop in player1) {
+            if (player1.hasOwnProperty(prop)) {
+                delete player1[prop];
+            }
+        }
+
+        for (let prop in playerAi) {
+            if (playerAi.hasOwnProperty(prop)) {
+                delete playerAi[prop];
+            }
+        }
+
+
+        result.textContent = '';
+        reset.style.display = 'none';
+        sizeButtons.style.display = 'block';
+    })
 }
 
 

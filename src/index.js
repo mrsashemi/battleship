@@ -9,8 +9,8 @@ export const player1 = {};
 export const playerAi = {};
 
 //cacheDom
-const initialBoard = document.querySelector(".gameBoard");
-const aiBoard = document.querySelector(".aiBoard");
+export let initialBoard = document.querySelector(".gameBoard");
+export const aiBoard = document.querySelector(".aiBoard");
 const sizeButtons = document.querySelector(".sizeButtons");
 const sixBySix = document.getElementById("six");
 const eightByEight = document.getElementById("eight");
@@ -66,7 +66,7 @@ function selectDimensions(dimension) {
 };
 
   //////////////////////////////////////////////////////////////////////////
- //Once initialized, have the player and AI set their pieces on the board//
+ //Once initialized, have the player set their pieces on the board//
 //////////////////////////////////////////////////////////////////////////
 function setPieces(playerPicker, n, dimension) {
     let boardSquare = [...document.querySelectorAll(".boardSquare")];
@@ -135,6 +135,9 @@ function setPieces(playerPicker, n, dimension) {
                         let newBoard = oldBoard.cloneNode(true);
                         oldBoard.parentNode.removeChild(oldBoard);
                         document.getElementById("boards").prepend(newBoard);
+
+                        //Set the original gameBoard to the newly cloned one
+                        initialBoard = newBoard;
 
                         //display start game button
                         beginGame.style.display = 'block';

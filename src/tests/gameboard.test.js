@@ -49,6 +49,6 @@ describe('gameboard object, its properties, its functions', () => {
         testBoard.submarine.hitLocation = ["Blast", "Blast", "Blast"];
         testBoard.destroyer.hitLocation = ["Blast", "Blast"];
 
-        expect(testBoard.checkLoss()).toStrictEqual("All ships destroyed. Game Over, you lost.")
+        expect(testBoard.checkLoss()).toStrictEqual(true)
     })
 })

@@ -56,6 +56,7 @@ describe('player and computer objects and their properties ', () => {
         testPlayer.playerBoard.submarine.hitLocation = ["Blast", "Blast", "Blast"];
         testPlayer.playerBoard.destroyer.hitLocation = ["Blast", "Blast"];
 
+        expect(testPlayer.playerBoard.checkLoss()).toBeTruthy();
         expect(testAi.checkWin(testPlayer)).toStrictEqual("Congrats! You won the battle!")
         expect(testAi.isWinner).toBeTruthy();
     })
