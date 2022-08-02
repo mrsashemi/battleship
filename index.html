@@ -7,21 +7,29 @@
     <title>BattleShip</title>
 </head>
 <body>
-    <div id="boards">
-        <div class="gameBoard"></div>
-        <div class="aiBoard"></div>
+    <div id="backgroundContainer">
+        <div class="background1"></div>
+        <div class="background2"></div>
+        <div class="background3"></div>
+        <div class="borderBackground"></div>
     </div>
-    <div class="sizeButtons">
-        <h1>BATTLESHIP</h1>
-        <div>Select Dimensions</div>
-        <button id="six">6x6</button>
-        <button id="eight">8x8</button>
-        <button id="ten">10x10</button>
+    <div id="container">
+        <div id="boards">
+            <div class="gameBoard"></div>
+            <div class="aiBoard"></div>
+        </div>
+        <div class="sizeButtons">
+            <h1>BATTLESHIP</h1>
+            <h2>Select Dimensions</h3>
+            <button id="six">6x6</button>
+            <button id="eight">8x8</button>
+            <button id="ten">10x10</button>
+        </div>
+        <button id="axis">Rotate</button>
+        <button id="startGame">Begin War</button>
+        <button id="resetGame">RESET</button>
+        <div class="results"></div>
+        <script src="bundle.js"></script>
     </div>
-    <button id="axis">Rotate</button>
-    <button id="startGame">Begin War</button>
-    <button id="resetGame">RESET</button>
-    <div class="results"></div>
-    <script src="bundle.js"></script>
 </body>
 </html>
