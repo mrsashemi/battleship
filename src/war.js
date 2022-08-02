@@ -9,6 +9,7 @@ const sizeButtons = document.querySelector(".sizeButtons");
 export function fightWar() {
     beginGame.addEventListener('click', () => {
         player1.isTurn = true;
+        reset.style.display = 'none';
         beginGame.style.display = 'none';
         playerStrike();
     })
@@ -94,7 +95,7 @@ function computerStrike() {
 
 //Function to reset the game
 
-function resetGame() {
+export function resetGame() {
     reset.addEventListener('click', () => {
         while(initialBoard.firstChild) {
             initialBoard.removeChild(initialBoard.firstChild);
@@ -115,6 +116,7 @@ function resetGame() {
 
 
         result.textContent = '';
+        beginGame.style.display = 'none';
         reset.style.display = 'none';
         sizeButtons.style.display = 'flex';
     })

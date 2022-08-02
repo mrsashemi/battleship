@@ -2,7 +2,7 @@ import './style.css';
 import player from './players'
 import _ from 'lodash';
 import computer from './computer';
-import { fightWar } from './war';
+import { fightWar, resetGame } from './war';
 
 //declare objects
 export const player1 = {};
@@ -17,6 +17,7 @@ const eightByEight = document.getElementById("eight");
 const tenByTen = document.getElementById("ten");
 const axis = document.getElementById("axis")
 const beginGame = document.getElementById("startGame");
+const reset = document.getElementById("resetGame");
 
 
 //initialize the DOM with the gameboard
@@ -141,7 +142,9 @@ function setPieces(playerPicker, n, dimension) {
 
                         //display start game button
                         beginGame.style.display = 'block';
+                        reset.style.display = 'block';
                         axis.style.display = 'none';
+                        resetGame();
                     }
                 }
             })
